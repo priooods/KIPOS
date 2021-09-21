@@ -182,5 +182,5 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ url('js/allocationtruck.js') }}" type="text/javascript"></script>
+    <script src="{{ url('js/emkl/allocationtruck.js') }}" type="text/javascript"></script>
 @endsection

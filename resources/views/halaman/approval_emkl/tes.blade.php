@@ -86,5 +86,5 @@
     </section>
 @endsection
 @section('script')
-    <script src="{{ url('js/approvalemkl.js') }}" type="text/javascript"></script>
+    <script src="{{ url('js/emkl/approvalemkl.js') }}" type="text/javascript"></script>
 @endsection

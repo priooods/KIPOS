@@ -47,5 +47,5 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ url('js/approvalgto.js') }}" type="text/javascript"></script>
+    <script src="{{ url('js/emkl/approvalgto.js') }}" type="text/javascript"></script>
 @endsection
