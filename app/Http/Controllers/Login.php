@@ -20,7 +20,10 @@ class Login extends Controller
         ]);
 
         $users = User::where('username', $request->input('username'))
-            ->where('password',sha1('appcoregwnih'.$request->input('password')))->first();
+            ->where('password',sha1('appcoregwnih'.$request->input('password')))
+            ->with(['group_details' => function($a){
+                $a->with('customers_detail');
+            }])->first();
 
 
         if(!$users)
