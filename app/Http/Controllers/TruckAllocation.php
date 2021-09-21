@@ -22,9 +22,7 @@ class TruckAllocation extends Controller
         if(!session()->has('users'))
             return $this->HapusSemuaSession();
 
-        
-        $users = session('users');
-        $result = AllocationDetailEmkl::where('emkl_id',$users->group_details->m_customer_id)
+        $result = AllocationDetailEmkl::where('emkl_id',session('users')->group_details->m_customer_id)
             ->paginate(10);
 
         session()->put('header', $result);
@@ -52,17 +50,20 @@ class TruckAllocation extends Controller
     // group 2 => truck_alocation mkl
 
     public function method_truck(Request $request){
-        $cari = Truck::where('nopol','like','%'.$request->nopol.'%')->paginate(6);
+        $cari = Truck::orderBy('nopol')->where('nopol','like','%'.$request->nopol.'%')->paginate(6);
         return $cari->getCollection();
     }
+
     public function method_consignee(Request $request){
         $cari = Customer::where('code','like','%'.$request->code.'%')->paginate(6);
         return $cari->getCollection();
     }
+
     public function method_driver(Request $request){
         $cari = Driver::where('name','like','%'.$request->name.'%')->paginate(6);
         return $cari->getCollection();
     }
+    
     public function method_routes(Request $request){
         $cari = DRoutes::where('description','like','%'.$request->description.'%')->paginate(6);
         return $cari->getCollection();
@@ -141,7 +142,7 @@ class TruckAllocation extends Controller
                 $data->detail_emkls->customer_data->name,$data->detail_emkls->customer_data->email,'Permintaan GTO', $details);
             return $this->resEmails('e-mail berhasil dikirim !', $check_email ? 0 : 1);
         }
-        return $this->resEmails('E-mail anda tidak terdaftar ! Hubungi pemasaran untuk menambahkan email anda', $check_email ? 1 : 0);
+        return $this->resEmails('E-mail tidak terkirim karena email anda tidak terdaftar ! Hubungi pemasaran untuk menambahkan email anda', $check_email ? 1 : 0);
     }
 
     public function save_emkls(Request $request){

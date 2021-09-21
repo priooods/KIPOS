@@ -48,8 +48,8 @@ function detail_gto() {
                             }, 3000)
                         );
                     }
-                    console.log(e);
-                    // return (this.showLoading = false), this.getDetailsGto();
+                    // console.log(e);
+                    return (this.showLoading = false), this.getDetailsGto();
                 });
         },
         Rejected(id) {

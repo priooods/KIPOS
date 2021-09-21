@@ -30,9 +30,10 @@
         </div>
         <div class="bg-gray-100 py-1">
             <div class="flex container mx-auto text-xs font-semibold justify-start">
-                {{-- <a href="/" class="hover:text-gray-700">Home</a> --}}
                 <a href="/allocation" class="hover:text-black text-gray-500">Truck Allocation</a>
-                <a href='/approval/gto/{{Session::getId()}}' class="hover:text-black text-gray-500 ml-3">Approval GTO</a>
+                @if (session('users')->group_id == 2)
+                    <a href='/approval/gto/{{Session::getId()}}' class="hover:text-black text-gray-500 ml-3">Approval GTO</a>
+                @endif
                 @if (session('customer'))
                     <a href="/emkls/{{Session::getId()}}/{{base64_encode(session('customer')->id)}}/{{base64_encode(session('mkl_id'))}}" class="hover:text-black text-gray-500 ml-3">Approval EMKL</a>
                 @endif

@@ -13,13 +13,14 @@
                     <th class="border text-xs border-dashed py-1.5 w-1/4">No</th>
                     <th class="border text-xs border-dashed w-2/4">Nomor Polisi</th>
                     <th class="border text-xs border-dashed w-2/4">Driver</th>
-                    <th class="border text-xs border-dashed w-1/4">Ritase</th>
+                    {{-- <th class="border text-xs border-dashed w-1/4">Ritase</th> --}}
                     <th class="border text-xs border-dashed w-2/4">Valid From</th>
                     <th class="border text-xs border-dashed w-2/4">Valid Until</th>
                     <th class="border text-xs border-dashed w-2/4">Consignee</th>
                     <th class="border text-xs border-dashed w-2/4">Route</th>
                     <th class="border text-xs border-dashed w-2/4">Status Request</th>
-                    <th class="border text-xs border-dashed w-2/4">Action</th>
+                    <th class="border text-xs border-dashed w-2/4">Send</th>
+                    <th class="border text-xs border-dashed w-2/4">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,13 +34,6 @@
                         <template x-if="item.m_drivers_id == null">
                             <th class="border text-xs border-dashed w-2/4">Driver tidak terdaftar</th>
                         </template>
-                        <template x-if="item.ritase">
-                            <th class="border text-xs border-dashed w-2/4" x-text="item.ritase"></th>
-                        </template>
-                        <template x-if="!item.ritase">
-                            <th class="border text-xs border-dashed w-2/4"></th>
-                        </template>
-                        {{-- <th class="border text-xs border-dashed w-2/4" x-text="item.ritase">fefe</th> --}}
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_start"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_end"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.consigne.name "></th>
@@ -51,14 +45,14 @@
                                 : 'Rejected by EMKL'">
                         </th>
                         <th class="border text-xs border-dashed py-2 px-2 w-2/4">
-                            <div x-on:class="item.status_request == 2 ? 'grid gap-2 grid-cols-2' : 'text-center'">
-                                <template x-if="item.status_request == 2">
-                                    <div x-on:click='sendEmail(item)' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Send e-mail</p></div>
-                                </template>
-                                {{-- <template x-if="item.status_request == 0"> --}}
-                                    <div x-on:click='deleteList(item.id)' class="bg-red-500 hover:bg-red-600 px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm">Delete</div>
-                                {{-- </template> --}}
-                            </div>
+                            <template x-if="item.status_request == 2">
+                                <div x-on:click='sendEmail(item)' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Send e-mail</p></div>
+                            </template>
+                        </th>
+                        <th class="border text-xs border-dashed py-2 px-2 w-2/4">
+                            <template x-if="item.status_request == 0">
+                                <div x-on:click='deleteList(item.id)' class="bg-red-500 hover:bg-red-600 px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm">Delete</div>
+                            </template>
                         </th>
                     </tr>
                 </template>

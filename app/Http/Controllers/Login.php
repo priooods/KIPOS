@@ -30,7 +30,13 @@ class Login extends Controller
             return redirect('/')->with('failure','Account anda tidak ditemukan !');
 
         $users->group_details;
+        // return $users;
         $request->session()->put('users',$users);
+        
+        if($users->group_id != 33)
+            return redirect('/allocation');
+        if($users->group_id == 33)
+            return redirect('/emkl');
         return redirect('/');
     } 
 }

@@ -32,6 +32,8 @@ Route::prefix('approval')->group(function () {
 Route::prefix('emkls')->group(function () {
     Route::get('/{token}/{id}/{emkl}', 'ApprovalEmkls@index')->name('halaman.approval_emkl.index');
 });
+
+
 Route::post('emkls_verif', 'ApprovalEmkls@verifyed');
 Route::post('emkls_reject', 'ApprovalEmkls@rejectEmails');
 
