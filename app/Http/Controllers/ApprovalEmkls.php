@@ -29,11 +29,11 @@ class ApprovalEmkls extends Controller
 
     public function verifyed(Request $request){
         $allocation_emkl = AlocationEmkl::find(session('mkl_id'));
-        // return $this->resSuccess('jkjk', $allocation_emkl);
+        return $this->resSuccess('jkjk', $allocation_emkl);
         // $allocation_emkl->update(['status_request' => 5]);
 
         $customer = Customer::find(session('customer')->id);
-        return $this->resSuccess('s', $customer);
+        // return $this->resSuccess('s', $customer);
         $details = [
             'nama_tujuan' => $customer->name,
             'pesan' => 'telah kami verifikasi',
