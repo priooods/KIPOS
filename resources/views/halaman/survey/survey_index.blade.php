@@ -7,6 +7,8 @@
     <title>Support System</title>
 </head>
 <body>
-    
+    <section>
+        <h1>halaman survey</h1>
+    </section>
 </body>
 </html>

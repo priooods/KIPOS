@@ -11,7 +11,8 @@ class Dashboard extends Controller
 
     public function index(){
         if(!session()->has('users'))
-            return $this->HapusSemuaSession();
+            return redirect('/survey');
+            // return $this->HapusSemuaSession();
 
         return view('halaman.home');
     }

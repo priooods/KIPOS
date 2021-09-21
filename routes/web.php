@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Session;
 Route::get('/', 'Dashboard@index')->name('halaman.home');
 Route::get('/user/login', 'Login@index')->name('login');
+Route::get('/survey', 'SurveyController@index')->name('halaman.survey.survey_index');
 Route::post('call_login', 'Login@method_login');
 
 
@@ -46,3 +47,4 @@ Route::prefix('index')->group(function () {
 
 
 // Survey Routes Setup
+// Route::get('survey', 'surveycontroller@index')->name('survey');

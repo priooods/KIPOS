@@ -36,6 +36,7 @@
                 @if (session('customer'))
                     <a href="/emkls/{{Session::getId()}}/{{base64_encode(session('customer')->id)}}/{{base64_encode(session('mkl_id'))}}" class="hover:text-black text-gray-500 ml-3">Approval EMKL</a>
                 @endif
+                <a href='/survey' class="hover:text-black text-gray-500 ml-3">Survey</a>
             </div>
         </div>
     </section>
