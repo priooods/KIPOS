@@ -12,7 +12,8 @@ class ApprovalEmkls extends Controller
 {
     public function index($token, $id, $emkl){
 
-        $urls = $token . '/' . $id . '/' . $emkl;
+        $urls = 'emkls/' . $token . '/' . $id . '/' . $emkl;
+        echo($urls);
         if(!session()->has('users') && $token != Session::getId()){
             session()->put('urls_emkls',$urls);
             return $this->HapusSemuaSession();
