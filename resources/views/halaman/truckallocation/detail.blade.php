@@ -69,19 +69,7 @@
                                 <span class="text-red-600">*</span>
                             </label>
                             <div class="col-span-3 grid grid-cols-1 md:grid-cols-1 gap-2">
-                                {{-- <input x-text="consignee" readonly type="text" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Code.."> --}}
-                                {{-- <div class="relative">
-                                    <input x-model="consignee" readonly type="text" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Code..">
-                                    <template x-if="consignee_box && consignee">
-                                        <div class="absolute top-9 z-20 w-full py-1 border-b border-r border-l text-xs bg-white">
-                                            <template x-for="item in list">
-                                                <p x-on:click="selectConsigne(item.id,item.code,item.name)" class="px-2 cursor-pointer py-0.5 hover:bg-blue-100" x-text="item.code"></p>
-                                            </template>
-                                        </div>
-                                    </template>
-                                </div> --}}
                                 <div class="inline-flex">
-                                    {{-- <p class="font-bold my-auto mr-1.5">-</p> --}}
                                     <input value="{{session('allocation_detail')->consignee}}" type="text" readonly  class="appearance-none border truncate cursor-not-allowed bg-gray-100 border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description..">
                                 </div>
                             </div>
@@ -118,21 +106,12 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4 form-group">
-                            <label class="text-xs font-sans font-semibold my-auto" for="ritase">
-                                <span>Ritase</span>
-                                <span class="text-red-600">*</span>
-                            </label>
-                            <div class="col-span-3 w-full">
-                                <input x-model="form.ritase" type="number" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ritase.." name="ritase">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4 form-group">
                             <label class="text-xs font-sans font-semibold my-auto" for="valid_until">
                                 <span>Valid Until</span>
                                 <span class="text-red-600">*</span>
                             </label>
                             <div class="col-span-3 w-full relative">
-                                <input x-model="form.active_end" type="date" id="end_dats" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Valid end.." name="active_end">
+                                <input x-model="form.active_end" type="date" id="end_dats" class="appearance-none border rounded bg-white w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Valid end.." name="active_end">
                                 <span class="absolute bg-white w-3/6 left-4 text-xs top-2.5" id="hide_end"></span>
                             </div>
                         </div>
@@ -142,7 +121,7 @@
                                 <span class="text-red-600">*</span>
                             </label>
                             <div class="col-span-3 w-full relative">
-                                <input x-model="form.active_start" id="form_dats" type="date" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Valid form.." name="active_start">
+                                <input x-model="form.active_start" id="form_dats" type="date" class="appearance-none border rounded bg-white w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Valid form.." name="active_start">
                                 <span class="absolute bg-white w-3/6 left-4 text-xs top-2.5" id="hide_from"></span>
                             </div>
                         </div>

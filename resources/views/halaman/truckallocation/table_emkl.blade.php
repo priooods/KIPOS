@@ -27,11 +27,22 @@
                     <tr class="text-center hover:bg-blue-50 font-semibold">
                         <th class="border text-xs border-dashed w-1/4" x-text="i + 1"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.mobil.nopol"></th>
-                        <th class="border text-xs border-dashed w-2/4" x-text="item.driver.name"></th>
-                        <th class="border text-xs border-dashed w-2/4" x-text="item.ritase"></th>
+                        <template x-if="item.m_drivers_id">
+                            <th class="border text-xs border-dashed w-2/4" x-text="item.driver.name"></th>
+                        </template>
+                        <template x-if="item.m_drivers_id == null">
+                            <th class="border text-xs border-dashed w-2/4">Driver tidak terdaftar</th>
+                        </template>
+                        <template x-if="item.ritase">
+                            <th class="border text-xs border-dashed w-2/4" x-text="item.ritase"></th>
+                        </template>
+                        <template x-if="!item.ritase">
+                            <th class="border text-xs border-dashed w-2/4"></th>
+                        </template>
+                        {{-- <th class="border text-xs border-dashed w-2/4" x-text="item.ritase">fefe</th> --}}
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_start"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_end"></th>
-                        <th class="border text-xs border-dashed w-2/4" x-text="item.consigne.name"></th>
+                        <th class="border text-xs border-dashed w-2/4" x-text="item.consigne.name "></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.route.description"></th>
                         <th class="border text-xs border-dashed w-2/4" 
                             x-text="item.status_request == 0 ? 'Belum Dikirim' : item.status_request == 1 ? 'Available' 

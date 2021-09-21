@@ -86,12 +86,12 @@ class TruckAllocation extends Controller
                     'desc' => '',
                     'nama_tujuan' => $users->value1,
                     'nopol' => $emkl->mobil->nopol,
-                    'dari' => session('users')->group_details->customers_detail->name,
+                    'dari' => session('users')->realname,
                     'link' => Session::getId() . '/' . $codes,
                     'table' => [
                         'Polisi' => $emkl->mobil->nopol,
-                        'Driver' => $emkl->driver->name,
-                        'Ritase' => $emkl->ritase,
+                        'Driver' => $emkl->driver ? $emkl->driver->name : 'tidak terdaftar',
+                        'Ritase' => $emkl->ritase ? $emkl->ritase : '0',
                         'Active_date' => $emkl->active_start,
                         'End_date' => $emkl->active_end,
                         'consigne' => $emkl->consigne->name,
@@ -120,25 +120,28 @@ class TruckAllocation extends Controller
         $emkl = AlocationEmkl::where('id',$request->id)->with('mobil','driver','route','consigne')->first();
         session()->put('mkl_id',$request->id);
         $details = [
-            'nama_tujuan' => $data->detail_emkls->customer_data->name,
+            'nama_tujuan' => $data->detail_emkls->customer_data ? $data->detail_emkls->customer_data->name : 'Failure Mail',
             'nopol' => $emkl->mobil->nopol,
-            'dari' => session('users')->group_details->customers_detail->name,
-            'link_customer' => Session::getId() . '/' . base64_encode($data->detail_emkls->customer_data->id) . '/' . base64_encode($emkl->id),
+            'dari' => session('users')->realname,
+            'link_customer' => Session::getId() . '/' . base64_encode($data->detail_emkls->customer_data ? $data->detail_emkls->customer_data->id : session('users')->realname) . '/' . base64_encode($emkl->id),
             'table' => [
                 'Polisi' => $emkl->mobil->nopol,
-                'Driver' => $emkl->driver->name,
-                'Ritase' => $emkl->ritase,
+                'Driver' => $emkl->driver ? $emkl->driver->name : 'tidak terdaftar',
+                'Ritase' => $emkl->ritase ? $emkl->ritase : '0',
                 'Active_date' => $emkl->active_start,
                 'End_date' => $emkl->active_end,
                 'consigne' => $emkl->consigne->name,
                 'routes' => $emkl->route->description,
             ],
         ];
-        $this->send_email(session('users')->group_details->customers_detail->name,
-                session('users')->group_details->customers_detail->email ? 
-                session('users')->group_details->customers_detail->email : "belumterdaftar@example.com",
-                $data->detail_emkls->customer_data->name, $data->detail_emkls->customer_data->email,'Permintaan GTO', $details);
-        return $this->resSuccess('e-mail berhasil dikirim !', $emkl);
+        $check_email = session('users')->group_details->customers_detail->email;
+        $check_penerima = $data->detail_emkls->customer_data;
+        if($check_email && $check_penerima){
+            $this->send_email(session('users')->realname,session('users')->group_details->customers_detail->email,
+                $data->detail_emkls->customer_data->name,$data->detail_emkls->customer_data->email,'Permintaan GTO', $details);
+            return $this->resEmails('e-mail berhasil dikirim !', $check_email ? 0 : 1);
+        }
+        return $this->resEmails('E-mail anda tidak terdaftar ! Hubungi pemasaran untuk menambahkan email anda', $check_email ? 1 : 0);
     }
 
     public function save_emkls(Request $request){

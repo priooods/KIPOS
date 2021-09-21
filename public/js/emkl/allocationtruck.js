@@ -29,8 +29,7 @@ function details() {
         consignee_box: false,
         form: {
             m_trucks_id: null,
-            m_drivers_id: null,
-            ritase: null,
+            ritase: 0,
             active_start: new moment().format("YYYY-MM-DD"),
             active_end: new moment().format("YYYY-MM-DD"),
             m_route_id: null,
@@ -54,17 +53,6 @@ function details() {
                         });
                 } else return (this.police_box = false);
             });
-            // this.$watch("consignee", (v) => {
-            //     this.desc_consignee = null;
-            //     if (v) {
-            //         this.consignee_box = true;
-            //         fetch("/index/call_consigne?code=" + v)
-            //             .then((res) => res.json())
-            //             .then((e) => {
-            //                 this.list = e;
-            //             });
-            //     } else return (this.consignee_box = false);
-            // });
             this.$watch("driver", (v) => {
                 this.form.m_drivers_id = null;
                 if (v) {
@@ -107,11 +95,6 @@ function details() {
             this.police = pol;
             return (this.police_box = false), (this.expire_date = exp);
         },
-        // selectConsigne(id, code, name) {
-        //     this.form.m_consignee_id = id;
-        //     this.consignee = code;
-        //     return (this.consignee_box = false), (this.desc_consignee = name);
-        // },
         selectDriver(id, name) {
             this.driver = name;
             return (this.driver_box = false), (this.form.m_drivers_id = id);
@@ -125,10 +108,8 @@ function details() {
             if (
                 !this.expire_date ||
                 !this.form.m_route_id ||
-                !this.form.m_drivers_id ||
                 !this.form.active_start ||
-                !this.form.active_end ||
-                !this.form.ritase
+                !this.form.active_end
             ) {
                 this.validation = 1;
                 setTimeout(() => {
