@@ -37,6 +37,7 @@ function detail_gto() {
             })
                 .then((res) => res.json())
                 .then((e) => {
+                    console.log(e, "result request !");
                     this.getDetailsGto();
                     if (e.error_code) {
                         this.validation = 1;

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Login
 {
@@ -15,9 +16,9 @@ class Login
      */
     public function handle($request, Closure $next)
     {
-        if(!session()->has('users'))
-            return redirect('/'); 
-
+        if(!Auth::user()){
+            return redirect('/user/login'); 
+        }
         return $next($request);
     }
 }

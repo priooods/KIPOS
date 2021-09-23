@@ -130,6 +130,7 @@ function details() {
                 })
                     .then((res) => res.json())
                     .then((e) => {
+                        console.log(e);
                         if (e.error_code)
                             return (
                                 (this.showLoading = false),
@@ -168,7 +169,7 @@ function details() {
             })
                 .then((res) => res.json())
                 .then((e) => {
-                    console.log(e, "data input");
+                    console.log(e, "data input email");
                     this.getDetailsAllocation();
                     return (
                         (this.showLoading = false),
@@ -199,6 +200,7 @@ function details() {
                         this.popUpEmail = true;
                     }
                     this.getDetailsAllocation();
+                    console.log(e);
                     return (
                         (this.showLoading = false),
                         (this.validation = 2),

@@ -16,7 +16,7 @@
             <div class="flex justify-center items-center h-screen">
                 <div class="p-4 rounded-md shadow-xl border md:w-2/6 w-full md:mx-0 mx-2">
                     <h2 class="font-bold text-center  text-lg">Login</h2>
-                    <form class="w-full mt-10" action="/call_login" method="POST">
+                    <form class="w-full mt-10" action="/user/login" method="POST">
                         @csrf
                         <div class="form-group">
                             <label class="block text-gray-700 text-sm font-sans font-semibold mb-2" for="username">Username</label>

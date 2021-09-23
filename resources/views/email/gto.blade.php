@@ -27,7 +27,6 @@
                 <tr>
                     <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Nopol</th>
                     <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Driver</th>
-                    <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Ritase</th>
                     <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Valid From</th>
                     <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Valid Until</th>
                     <th style="padding: 7px; text-align: center; font-size: 11px; background-color: #023a6e; color: #fff;">Consignee</th>
@@ -37,7 +36,6 @@
             <tbody>
                 <td style="font-size: 11px; text-align:center;">{{$table['Polisi']}}</td>
                 <td style="font-size: 11px; text-align:center;">{{$table['Driver']}}</td>
-                <td style="font-size: 11px; text-align:center;">{{$table['Ritase']}}</td>
                 <td style="font-size: 11px; text-align:center;">{{$table['Active_date']}}</td>
                 <td style="font-size: 11px; text-align:center;">{{$table['End_date']}}</td>
                 <td style="font-size: 11px; text-align:center;">{{$table['consigne']}}</td>
@@ -47,10 +45,10 @@
         <div style="margin-top: 12px; font-size: 13px; display: block;">
             <span>Click tautan dibawah ini untuk pergi ke halaman approval</span>
             @isset($link)
-                <a href="{{url('/approval/gto/' . $link)}}">{{url('/approval/gto/' . $link)}}</a>
+                <a href="{{url($link)}}">{{url($link)}}</a>
             @endisset
             @isset($link_customer)
-                <a href="{{url('/emkls/' . $link_customer)}}">{{url('/emkls/' . $link_customer)}}</a>
+                <a href="{{url( $link_customer)}}">{{url( $link_customer )}}</a>
             @endisset
         </div>
     @endisset
@@ -89,7 +87,6 @@
         <div style="margin-top: 4px; font-size: 12px;">
             <p style="margin-bottom: 2px;">Click tautan dibawah ini untuk meneruskan proses permintaan anda</p>
             @isset($link)
-                {{-- <a href="{{url('/emkls/' + $link)}}"></a> --}}
                 <a href="">{{url('/approval/gto/' . $link)}}</a>
             @endisset
         </div>

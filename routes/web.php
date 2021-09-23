@@ -1,38 +1,38 @@
 <?php
 
-use Illuminate\Support\Facades\Session;
-Route::get('/', 'Dashboard@index')->name('halaman.home');
-Route::get('/user/login', 'Login@index')->name('login');
-Route::post('call_login', 'Login@method_login');
+use App\Http\Controllers\ApprovalEmkls;
+use App\Http\Controllers\ApprovalGto;
+use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Login;
+use App\Http\Controllers\TruckAllocation;
 
 
-// EMKL Routes Setup
+Route::get('/', [Dashboard::class,'index']);
+Route::group(['middleware' => 'web'], function () {
+    Route::get('user/login', [Login::class,'index']);
+    Route::post('user/login', [Login::class,'method_login']);
 
-Route::post('new_emkls', 'TruckAllocation@save_emkls');
-Route::get('details_emkls', 'TruckAllocation@get_detail');
-Route::post('delete_emkls', 'TruckAllocation@delete_emkls');
-Route::get('send_request', 'TruckAllocation@send_request');
-Route::post('sendemail', 'TruckAllocation@sendEmails');
+    Route::get('allocation', [TruckAllocation::class,'index'])->middleware('auth');
+    Route::get('allocation/{id}', [TruckAllocation::class,'index_details'])->middleware('auth');
 
-Route::get('details_gto', 'ApprovalGto@get_detail');
-Route::post('approve_gto', 'ApprovalGto@Approved');
-Route::post('rejected_gto', 'ApprovalGto@Rejected');
-Route::post('cari_gto', 'ApprovalGto@searching');
+    Route::post('new_emkls', [TruckAllocation::class,'save_emkls']);
+    Route::get('details_emkls', [TruckAllocation::class,'get_detail']);
+    Route::post('delete_emkls', [TruckAllocation::class,'delete_emkls']);
+    Route::get('send_request', [TruckAllocation::class,'send_request']);
+    Route::post('sendemail', [TruckAllocation::class,'sendEmails']);
 
-Route::prefix('allocation')->group(function () {
-    Route::get('/', 'TruckAllocation@index')->name('halaman.truckallocation.index');
-    Route::get('/{id}', 'TruckAllocation@index_details')->name('halaman.truckallocation.detail');
+    Route::get('details_gto', [ApprovalGto::class, 'get_detail']);
+    Route::post('approve_gto', [ApprovalGto::class,'Approved']);
+    Route::post('rejected_gto', [ApprovalGto::class,'Rejected']);
+    Route::post('cari_gto', [ApprovalGto::class,'searching']);
+
 });
 
-Route::prefix('approval')->group(function () {
-    Route::get('/gto/{token}', 'ApprovalGto@index')->name('halaman.approval_gto.index');
-    Route::get('/gto/{token}/{id}', 'ApprovalGto@index_details')->name('halaman.approval_gto.detail_gto');
-});
+Route::get('approval/gto/{token}', [ApprovalGto::class,'index'])->middleware('auth');
+Route::get('approval/gto/{token}/{header_id}/', [ApprovalGto::class,'index_details']);
 
-Route::prefix('emkls')->group(function () {
-    Route::get('/{token}/{id}/{emkl}', 'ApprovalEmkls@index')->name('halaman.approval_emkl.index');
-});
-
+Route::get('emkls/{token}/{id}/', [ApprovalEmkls::class,'index']);
+Route::get('emkls/approved/{token}/{id}/{emkl}', [ApprovalEmkls::class,'index_approved']);
 
 Route::post('emkls_verif', 'ApprovalEmkls@verifyed');
 Route::post('emkls_reject', 'ApprovalEmkls@rejectEmails');

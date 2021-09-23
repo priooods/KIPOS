@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Hash;
+use App\Libs\CustomHash\Sha1Hasher;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Hash::extend("sha1", function($app)
+        {
+            return new Sha1Hasher();
+        });
     }
 }

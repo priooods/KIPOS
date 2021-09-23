@@ -8,5 +8,5 @@ class DRoutes extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'm_route';
-    protected $fillable = ['code','description','m_destination_id'];
+    protected $guarded = [];
 }

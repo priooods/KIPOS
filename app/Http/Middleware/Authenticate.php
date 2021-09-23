@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -14,9 +15,9 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (session()->has('users'))
-            return 'homepage';
+        if (!Auth::user())
+            return '/user/login';
         else 
-            return '/';
+            return $request;
     }
 }

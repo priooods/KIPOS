@@ -37,10 +37,12 @@
                         <th class="border truncate text-xs border-dashed">{{$item->commodity}}</th>
                         <th class="border truncate text-xs border-dashed">{{$item->truck_type}}</th>
                         <th class="border truncate text-xs border-dashed">{{$item->transportir}}</th>
-                        <th class="border truncate grid grid-cols-2 gap-2 py-2 text-xs border-dashed px-2">
-                            <div x-on:click='openPopupVerif({{$item}})' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Verif</p></div>
-                            <div x-on:click='openPopupReject({{$item}})' class="bg-red-500 hover:bg-red-600 px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm">Reject</div>
-                        </th>
+                        {{-- @if ($item->status_request != 5) --}}
+                            <th class="border truncate grid grid-cols-2 gap-2 py-2 text-xs border-dashed px-2">
+                                <div x-on:click='openPopupVerif({{$item}})' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Verif</p></div>
+                                <div x-on:click='openPopupReject({{$item}})' class="bg-red-500 hover:bg-red-600 px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm">Reject</div>
+                            </th>
+                        {{-- @endif --}}
                     </tr>
                 @endforeach
             </tbody>

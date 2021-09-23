@@ -20,8 +20,8 @@
                 <div class="text-xs flex justify-start">
                     <h4>Krakatau Bandar Samudera</h4>
                     <div class="ml-auto flex my-auto">
-                        @if (Session::get('users'))
-                            <p>{{Session::get('users')->realname}}</p>
+                        @if (Auth::check())
+                            <p>{{Auth::user()->realname}}</p>
                         @endif
                         <a href="/index/call_logout" class="text-blue-100 ml-2 my-auto hover:text-red-500 uppercase">logout</a>
                     </div>
@@ -30,11 +30,13 @@
         </div>
         <div class="bg-gray-100 py-1">
             <div class="flex container mx-auto text-xs font-semibold justify-start">
-                <a href="/allocation" class="hover:text-black text-gray-500">Truck Allocation</a>
-                @if (session('users')->group_id == 2)
+                @if (Auth::user()->group_id != 33 && Auth::user()->group_id != 2)
+                    <a href="/allocation" class="hover:text-black text-gray-500">Truck Allocation</a>
+                @endif
+                @if (Auth::user()->group_id == 33)
                     <a href='/approval/gto/{{Session::getId()}}' class="hover:text-black text-gray-500 ml-3">Approval GTO</a>
                 @endif
-                @if (session('customer'))
+                @if (session('customer') && Auth::user()->group_id == 2)
                     <a href="/emkls/{{Session::getId()}}/{{base64_encode(session('customer')->id)}}/{{base64_encode(session('mkl_id'))}}" class="hover:text-black text-gray-500 ml-3">Approval EMKL</a>
                 @endif
                 <a href='/survey' class="hover:text-black text-gray-500 ml-3">Survey</a>

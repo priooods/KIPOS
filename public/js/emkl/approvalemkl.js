@@ -34,7 +34,7 @@ function approvalemkls() {
                 .then((res) => res.json())
                 .then((e) => {
                     console.log(e);
-                    if (e.error_code)
+                    // if (e.error_code)
                         // console.log(e);
                         return (this.showLoading = false), this.getDetailsGto();
                 });
@@ -55,7 +55,7 @@ function approvalemkls() {
             })
                 .then((res) => res.json())
                 .then((e) => {
-                    if (e.error_code)
+                    // if (e.error_code)
                         // console.log(e);
                         return (this.showLoading = false), this.getDetailsGto();
                 });

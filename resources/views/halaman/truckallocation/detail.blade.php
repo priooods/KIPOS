@@ -6,33 +6,33 @@
             <div class="info-umum">
                 <h3 class="font-bold text-sm uppercase">information Umum</h3>
                 <div class="grid grid-cols-1 text-xs mt-3 md:grid-cols-3 gap-2">
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Project No</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.project_no"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Project No</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->project_no}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Vessel</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.vessel"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Vessel</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->vessel}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Consignee</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.consignee"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Consignee</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->consignee}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Truck Qty</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.truck_qty"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Truck Qty</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->truck_qty}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Commodity</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.commodity"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Commodity</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->commodity}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Truck Type</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.truck_type"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Truck Type</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->truck_type}}</p></div>
                     </div>
-                    <div class="grid-cols-2 grid shadow-xl" x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : ''">
-                        <div x-bind:class="!details_table.project_no ? 'animate-pulse bg-gray-300' : 'bg-indigo-900'" class="text-white py-1 flex items-center justify-center"><p>Transportir</p></div>
-                        <div x-show="details_table" class="py-1 border text-center flex justify-center items-center"><p x-text="details_table.transportir"></p></div>
+                    <div class="grid-cols-2 grid shadow-xl">
+                        <div class="text-white bg-indigo-900 py-1 flex items-center justify-center"><p>Transportir</p></div>
+                        <div class="py-1 border text-center flex justify-center items-center"><p>{{$detail->transportir}}</p></div>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                             </label>
                             <div class="col-span-3 grid grid-cols-1 md:grid-cols-1 gap-2">
                                 <div class="inline-flex">
-                                    <input value="{{session('allocation_detail')->consignee}}" type="text" readonly  class="appearance-none border truncate cursor-not-allowed bg-gray-100 border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description..">
+                                    <input value="{{$detail->consignee}}" type="text" readonly  class="appearance-none border truncate cursor-not-allowed bg-gray-100 border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description..">
                                 </div>
                             </div>
                         </div>

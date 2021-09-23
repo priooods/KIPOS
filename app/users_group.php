@@ -8,10 +8,11 @@ class users_group extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'm_user_login_group_details';
-    protected $fillable = ['m_user_id','m_customer_id','m_employee_id'];
+    protected $guarded = [];
+    
 
     public function customers_detail(){
-        return $this->hasOne(Customer::class,'id','m_user_id');
+        return $this->hasOne(Customer::class,'id','m_customer_id');
     }
 
 }

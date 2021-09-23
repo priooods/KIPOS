@@ -8,6 +8,5 @@ class Customer extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'm_customers';
-    protected $fillable = ['user_id','prefix_code','code','name','contact_email','code_ifs'];
-
+    protected $guarded = [];
 }

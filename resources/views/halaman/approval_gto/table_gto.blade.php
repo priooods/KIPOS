@@ -13,7 +13,6 @@
                     <th class="border text-xs border-dashed py-1.5 w-1/4">No</th>
                     <th class="border text-xs border-dashed w-2/4">Nomor Polisi</th>
                     <th class="border text-xs border-dashed w-2/4">Driver</th>
-                    <th class="border text-xs border-dashed w-1/4">Ritase</th>
                     <th class="border text-xs border-dashed w-2/4">Valid From</th>
                     <th class="border text-xs border-dashed w-2/4">Valid Until</th>
                     <th class="border text-xs border-dashed w-2/4">Consignee</th>
@@ -27,8 +26,7 @@
                     <tr class="text-center hover:bg-blue-50 font-semibold">
                         <th class="border text-xs border-dashed w-1/4" x-text="i + 1"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.mobil.nopol"></th>
-                        <th class="border text-xs border-dashed w-2/4" x-text="item.driver.name"></th>
-                        <th class="border text-xs border-dashed w-2/4" x-text="item.ritase"></th>
+                        <th class="border text-xs border-dashed w-2/4" x-text="item.driver ? item.driver.name : 'tidak terdaftar !'"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_start"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.active_end"></th>
                         <th class="border text-xs border-dashed w-2/4" x-text="item.consigne.name"></th>
@@ -42,7 +40,7 @@
                         <th class="border text-xs border-dashed py-2 px-2 w-2/4">
                             <template x-if="item.status_request == 1">
                                 <div class="grid gap-2 grid-cols-2">
-                                    <div x-on:click='Approved(item)' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Send</p></div>
+                                    <div x-on:click='Approved(item)' class="bg-indigo-900 w-full px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm"><p>Verif</p></div>
                                     <div x-on:click='Rejected(item.id)' class="bg-red-500 hover:bg-red-600 px-1.5 py-0.5 text-white text-xs text-center cursor-pointer rounded-sm">Reject</div>
                                 </div>
                             </template>
