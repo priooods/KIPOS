@@ -38,7 +38,7 @@ class SurveyController extends Controller
     public function update(Request $request, $id)
     {
        
-        $header = \App\TCustomerratingHeader::where('t_project_header_id', $id)->first();
+        $header = \App\TCustomerRatingHeader::where('t_project_header_id', $id)->first();
         $header->update([
             'overall_rating'=> $request->rate,
             'customer_comment'=> $request->coment,
