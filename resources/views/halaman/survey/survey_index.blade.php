@@ -11,7 +11,7 @@
 </head>
 <body>
     <section>
-        <h1>Halaman Survey</h1>
+        <h1 style="padding: 5px; background-color:white">Halaman Survey</h1>
     </section>
         <div class="container">
             <p>{{$informations[0]->no_ppj}}</p>

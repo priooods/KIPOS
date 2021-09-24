@@ -22,8 +22,9 @@ class SurveyController extends Controller
             AND t_customer_rating_headers.token_status = '1'
             AND t_project_details.flag_served = 'Y'
             AND t_project_details.status_close = 'Y';");
-
-            if (!isset($data['informations']['id'])) {
+            // dd($data);
+            // dd($data['informations'][0]->id);
+            if (!isset($data['informations'][0]->id)) {
                return "Terima kasih telah memberikan penilaian." ;
             }
 
