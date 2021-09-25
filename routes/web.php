@@ -50,4 +50,5 @@ Route::prefix('index')->group(function () {
 
 // Survey Routes Setup
 // Route::get('survey', 'surveycontroller@index')->name('survey');
-Route::get('/survey', 'SurveyController@index')->name('halaman.survey.survey_index');
+Route::get('/survey/{token}', 'SurveyController@index')->name('halaman.survey.survey_index');
+Route::post('/update-rating/{id}', 'SurveyController@update')->name('Update.rating');
