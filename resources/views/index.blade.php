@@ -34,10 +34,10 @@
                     <a href="/allocation" class="hover:text-black text-gray-500">Truck Allocation</a>
                 @endif
                 @if (Auth::user()->group_id == 33)
-                    <a href='/approval/gto/{{Session::getId()}}' class="hover:text-black text-gray-500 ml-3">Approval GTO</a>
+                    <a href='/gto/{{Session::getId()}}' class="hover:text-black text-gray-500 ml-3">Approval GTO</a>
                 @endif
-                @if (session('customer') && Auth::user()->group_id == 2)
-                    <a href="/emkls/{{Session::getId()}}/{{base64_encode(session('customer')->id)}}/{{base64_encode(session('mkl_id'))}}" class="hover:text-black text-gray-500 ml-3">Approval EMKL</a>
+                @if (Auth::user()->group_id == 2)
+                    <a href="/mkl/{{Session::getId()}}/{{base64_encode(Auth::user()->id)}}" class="hover:text-black text-gray-500 ml-3">Approval MKL</a>
                 @endif
                 <a href='/survey' class="hover:text-black text-gray-500 ml-3">Survey</a>
             </div>

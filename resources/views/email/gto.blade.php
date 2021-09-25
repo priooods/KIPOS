@@ -43,12 +43,13 @@
             </tbody>
         </table>
         <div style="margin-top: 12px; font-size: 13px; display: block;">
-            <span>Click tautan dibawah ini untuk pergi ke halaman approval</span>
             @isset($link)
+                <span>Click tautan dibawah ini untuk pergi ke halaman approval</span>
                 <a href="{{url($link)}}">{{url($link)}}</a>
             @endisset
-            @isset($link_customer)
-                <a href="{{url( $link_customer)}}">{{url( $link_customer )}}</a>
+            @isset($link_mkl)
+                <span>Click tautan dibawah ini untuk pergi ke halaman approval</span>
+                <a href="{{url( $link_mkl)}}">{{url( $link_mkl )}}</a>
             @endisset
         </div>
     @endisset
@@ -84,11 +85,5 @@
     @endisset
     @isset($gto_approved)
         <p>{{$gto_approved}}</p>
-        <div style="margin-top: 4px; font-size: 12px;">
-            <p style="margin-bottom: 2px;">Click tautan dibawah ini untuk meneruskan proses permintaan anda</p>
-            @isset($link)
-                <a href="">{{url('/approval/gto/' . $link)}}</a>
-            @endisset
-        </div>
     @endisset
 </section>

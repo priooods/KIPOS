@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Commodity extends Model
+class CommodityBooking extends Model
 {
     protected $primaryKey = 'id';
-    protected $table = 'm_commodities';
+    protected $table = 't_commodity_bookings';
     protected $guarded = [];
-    
 }

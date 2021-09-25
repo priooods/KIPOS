@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\AllocationDetailEmkl;
 use App\AlocationEmkl;
-use App\Commodity;
 use App\Configuration;
 use App\Customer;
 use App\Driver;
@@ -29,9 +28,6 @@ class TruckAllocation extends Controller
     }
 
     public function index(){
-        // return response()->json([
-        //     'usesd' => auth()->user()
-        // ]);
         $result = AllocationDetailEmkl::where('emkl_id',Auth::user()->group_details->m_customer_id)
             ->paginate(10);
         return view('halaman.truckallocation.index')->with('result', $result);
@@ -93,7 +89,7 @@ class TruckAllocation extends Controller
                     'nama_tujuan' => $users->value1,
                     'nopol' => $emkl->mobil->nopol,
                     'dari' => Auth::user()->group_details->customers_detail->name,
-                    'link' => '/approval/gto/' . session()->getId() . '/' . $header_id,
+                    'link' => '/gto/detail/' . session()->getId() . '/' . $header_id,
                     'table' => [
                         'Polisi' => $emkl->mobil->nopol,
                         'Driver' => $emkl->driver ? $emkl->driver->name : 'tidak terdaftar',
@@ -131,7 +127,7 @@ class TruckAllocation extends Controller
             'nama_tujuan' => $tujuan->detail_emkls->customer_data ? $tujuan->detail_emkls->customer_data->name : 'Failure Mail',
             'nopol' => $emkl->mobil->nopol,
             'dari' => Auth::user()->group_details->customers_detail ? Auth::user()->group_details->customers_detail->name : Auth::user()->realname,
-            'link_customer' => '/emkls/approved/' . session()->getId() . '/' . base64_encode($tujuan->detail_emkls->customer_data ? $tujuan->detail_emkls->customer_data->id : Auth::user()->id) . '/' . base64_encode($emkl->t_request_allocation_truck_detail_id),
+            'link_mkl' => '/mkl/detail/' . session()->getId() . '/' . base64_encode(session('detail')->id),
             'table' => [
                 'Polisi' => $emkl->mobil->nopol,
                 'Driver' => $emkl->driver ? $emkl->driver->name : 'tidak terdaftar',

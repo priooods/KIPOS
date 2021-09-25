@@ -11,7 +11,9 @@ class AlocationEmkl extends Model
     protected $table = 't_truck_allocation_emkls';
     protected $guarded = [];
 
-    
+    public function mkl_dipakai(){
+        return $this->hasOne(TruckAllocationModel::class,'m_trucks_id','m_trucks_id');
+    }
 
     public function mobil(){
         return $this->hasOne(Truck::class,'id','m_trucks_id');

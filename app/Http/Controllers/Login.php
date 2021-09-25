@@ -31,19 +31,25 @@ class Login extends Controller
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
+        
 
         $credentials['password'] = 'appcoregwnih'.$request->password;
         if(!Auth::attempt($credentials)){
-            return redirect('/')->with('failure','Account anda tidak ditemukan !');
+            return redirect('/user/login')->with('failure','Account anda tidak ditemukan !');
         }
+
+        if(!Auth::user()->group_details)
+            return redirect('/user/login')->with('failure','Account anda tidak ditemukan !');
+
+        // return Auth::user();
 
         if(session()->get('url_gto'))
             return redirect(session()->get('url_gto'));
 
         if(Auth::user()->group_id == 2)
-            return redirect('/emkls/' . Session::getId() . '/' . base64_encode(Auth::user()->id));
+            return redirect('/mkl/' . Session::getId() . '/' . base64_encode(Auth::user()->id));
         if(Auth::user()->group_id == 33)
-            return redirect('/approval/gto/' . Session::getId());
+            return redirect('/gto/' . Session::getId());
         return redirect('/allocation');
     } 
 }

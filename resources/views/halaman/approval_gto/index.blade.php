@@ -8,7 +8,7 @@
         <div class="mb-2 flex justify-end">
             <form class="flex" action="/cari_gto" method="POST">
                 @csrf
-                <input name="ppj" id="ppj" type="text" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari PPJ..">
+                <input name="transportir" id="transportir" type="text" class="appearance-none border rounded w-full py-2 px-3 text-xs text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Cari transportir..">
                 <button type="submit" class="px-3 text-center uppercase flex items-center font-semibold bg-blue-400 text-xs text-white cursor-pointer"><p class="my-auto">cari</p></button>
             </form>
         </div>
@@ -38,7 +38,7 @@
                         <th class="border truncate text-xs border-dashed">{{$item->truck_type}}</th>
                         <th class="border truncate text-xs border-dashed">{{$item->transportir}}</th>
                         <th class="border truncate py-2 text-xs border-dashed">
-                            <a href="/approval/gto/{{Session::getId()}}/{{base64_encode($item->id)}}" 
+                            <a href="/gto/detail/{{Session::getId()}}/{{base64_encode($item->id)}}" 
                                 class="px-2 py-0.5 hover:text-white bg-blue-600 rounded-sm text-white hover:bg-blue-600">views</a>
                         </th>
                     </tr>

@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('content')
-    <div class="details container mx-auto" x-data="detail_gto()" x-init="init">
+    <div class="details container mx-auto" x-data="approvalemkls()" x-init="init">
         <div class="information mt-6 p-4 border">
             <div class="info-umum">
                 <h3 class="font-bold text-sm uppercase">information Umum</h3>
@@ -37,15 +37,40 @@
                 </div>
             </div>
         </div>
-        @include('halaman.approval_gto.table_gto')
-        
-        <template x-if="showLoading">
-            <div class="fixed top-0 left-0 right-0 bg-gray-500 bg-opacity-30 z-50 h-screen max-h-screen flex justify-center items-center">
-                <p class="text-xs text-blue-500 font-semibold animate-bounce">Sedang mengirim permintaan ...</p>
+        @if (count($dipakai) > 0)
+            <div class="my-8">
+                <p>Truck saat ini.</p>
+                <table class="border-collapse table-fixed w-full whitespace-no-wrap bg-white table-striped relative">
+                    <thead>
+                        <tr class="text-center rounded-md text-xs font-semibold bg-blue-200">
+                            <th class="border text-xs border-dashed py-1.5 w-1/4">No</th>
+                            <th class="border text-xs border-dashed w-2/4">Nomor Polisi</th>
+                            <th class="border text-xs border-dashed w-2/4">Project No</th>
+                            <th class="border text-xs border-dashed w-2/4">Vessel Name</th>
+                            <th class="border text-xs border-dashed w-2/4">Consignee</th>
+                            <th class="border text-xs border-dashed w-2/4">Destination</th>
+                            <th class="border text-xs border-dashed w-2/4">Commodity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dipakai as $key => $item)
+                            <tr class="text-center hover:bg-blue-50 font-semibold">
+                                <th class="py-1.5 border truncate text-xs border-dashed">{{$key + 1}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->mkl_dipakai->trucks->nopol}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->mkl_dipakai->header_project->project_no}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->mkl_dipakai->header_project->vesel_scehedule->vesel_data->name}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->mkl_dipakai->detail_emkls->customer_data->name}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->destination}}</th>
+                                <th class="border truncate text-xs border-dashed">{{$item->mkl_dipakai->commodity->desc}}</th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    </table>
             </div>
-        </template>
+        @endif
+        @include('halaman.approval_emkl.table_emkl')
     </div>
 @endsection
 @section('script')
-    <script src="{{ url('js/emkl/approvalgto.js') }}" type="text/javascript"></script>
+    <script src="{{ url('js/emkl/approvalemkl.js') }}" type="text/javascript"></script>
 @endsection

@@ -20,13 +20,11 @@ class ApprovalGto extends Controller
             return $this->HapusSemuaSession();
         
         $result = AllocationDetailEmkl::paginate(10);
-        session()->put('header_gto', $result);
         return view('halaman.approval_gto.index')->with('result', $result);
     }
 
     public function searching(Request $request){
-        $result = AllocationDetailEmkl::where('project_no','like','%'. '13286'.'%')
-            ->orWhere('transportir','like','%'. $request->ppj.'%')
+        $result = AllocationDetailEmkl::where('transportir','like','%'. $request->transportir.'%')
             ->paginate(10);
         return view('halaman.approval_gto.index', compact('result'));
     }
@@ -36,7 +34,7 @@ class ApprovalGto extends Controller
         if(!Auth::user()){
             //Check url dari email
             if($token && $header_id){
-                $url_gto_email = '/approval/gto/' . $token . '/' . $header_id;
+                $url_gto_email = '/gto/detail/' . $token . '/' . $header_id;
                 session()->put('url_gto',$url_gto_email);
             }
             return redirect('/user/login');
@@ -76,6 +74,15 @@ class ApprovalGto extends Controller
         $details = [
             'nama_tujuan' => $customers->name,
             'customers' => $customers->id,
+            'table' => [
+                'Polisi' => $data->mobil->nopol,
+                'Driver' => $data->driver ? $data->driver->name : 'tidak terdaftar',
+                'Ritase' => $data->ritase ? $data->ritase : '0',
+                'Active_date' => $data->active_start,
+                'End_date' => $data->active_end,
+                'consigne' => $data->consigne->name,
+                'routes' => $data->route->description,
+            ],
             'gto_approved' => "Permintaan Truck anda telah kami Approved !"
         ];
         if(Auth::user()->group_details->customers_detail->email)
@@ -90,6 +97,15 @@ class ApprovalGto extends Controller
         $details = [
             'nama_tujuan' => $customers->name,
             'customers' => $customers->id,
+            'table' => [
+                'Polisi' => $data->mobil->nopol,
+                'Driver' => $data->driver ? $data->driver->name : 'tidak terdaftar',
+                'Ritase' => $data->ritase ? $data->ritase : '0',
+                'Active_date' => $data->active_start,
+                'End_date' => $data->active_end,
+                'consigne' => $data->consigne->name,
+                'routes' => $data->route->description,
+            ],
             'gto_approved' => "Permintaan GTO anda di Rejected !"
         ];
         if($customers->email)
@@ -102,7 +118,7 @@ class ApprovalGto extends Controller
     public function get_detail(){
         $list = AlocationEmkl::where('t_request_allocation_truck_detail_id',session()->get('gto_detail')->id)
         ->where('status_request', 1)
-        // ->orWhere('status_request', 3)->orWhere('status_request', 4)
+        ->orWhere('status_request', 3)->orWhere('status_request', 4)
         ->with('mobil','driver','route','consigne')->paginate(10);
         return response()->json([
             'error_code' => 0,

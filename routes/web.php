@@ -9,7 +9,7 @@ use App\Http\Controllers\TruckAllocation;
 
 Route::get('/', [Dashboard::class,'index']);
 Route::group(['middleware' => 'web'], function () {
-    Route::get('user/login', [Login::class,'index']);
+    Route::get('user/login', [Login::class,'index'])->name('login');
     Route::post('user/login', [Login::class,'method_login']);
 
     Route::get('allocation', [TruckAllocation::class,'index'])->middleware('auth');
@@ -26,16 +26,17 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('rejected_gto', [ApprovalGto::class,'Rejected']);
     Route::post('cari_gto', [ApprovalGto::class,'searching']);
 
+    Route::get('gto/{token}', [ApprovalGto::class,'index'])->middleware('auth');
+    Route::get('gto/detail/{token}/{header_id}/', [ApprovalGto::class,'index_details']);
+
+    Route::get('mkl/{token}/{user_id}/', [ApprovalEmkls::class,'index'])->middleware('auth');
+    Route::get('mkl/detail/{token}/{header_id}', [ApprovalEmkls::class,'index_approved']);
+    Route::post('cari_mkl', [ApprovalEmkls::class,'searching']);
+
+    Route::get('details_mkl', [ApprovalEmkls::class, 'get_detail']);
+    Route::post('emkls_verif', [ApprovalEmkls::class,'verifyed']);
+    Route::post('emkls_reject', [ApprovalEmkls::class,'rejectEmails']);
 });
-
-Route::get('approval/gto/{token}', [ApprovalGto::class,'index'])->middleware('auth');
-Route::get('approval/gto/{token}/{header_id}/', [ApprovalGto::class,'index_details']);
-
-Route::get('emkls/{token}/{id}/', [ApprovalEmkls::class,'index']);
-Route::get('emkls/approved/{token}/{id}/{emkl}', [ApprovalEmkls::class,'index_approved']);
-
-Route::post('emkls_verif', 'ApprovalEmkls@verifyed');
-Route::post('emkls_reject', 'ApprovalEmkls@rejectEmails');
 
 Route::prefix('index')->group(function () {
     Route::get('call_truck', 'TruckAllocation@method_truck');

@@ -6,7 +6,7 @@ function approvalemkls() {
         details_table: {},
         list_details_table: [],
         init() {
-            // this.getDetailsGto();
+            this.getDetailsMkl();
         },
         openPopupVerif(item) {
             return (this.sementara = item), (this.popup = 1);
@@ -33,10 +33,7 @@ function approvalemkls() {
             })
                 .then((res) => res.json())
                 .then((e) => {
-                    console.log(e);
-                    // if (e.error_code)
-                        // console.log(e);
-                        return (this.showLoading = false), this.getDetailsGto();
+                    return (this.showLoading = false), this.getDetailsMkl();
                 });
         },
         Rejected() {
@@ -55,13 +52,24 @@ function approvalemkls() {
             })
                 .then((res) => res.json())
                 .then((e) => {
-                    // if (e.error_code)
-                        // console.log(e);
-                        return (this.showLoading = false), this.getDetailsGto();
+                    return (this.showLoading = false), this.getDetailsMkl();
                 });
         },
         getDetailsGto() {
             return window.location.reload;
+        },
+        getDetailsMkl() {
+            fetch("/details_mkl", {
+                method: "get",
+            })
+                .then((res) => res.json())
+                .then((e) => {
+                    console.log(e.list);
+                    return (
+                        (this.details_table = e.data),
+                        (this.list_details_table = e.list)
+                    );
+                });
         },
     };
 }

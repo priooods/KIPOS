@@ -15,6 +15,18 @@ class TruckAllocationModel extends Model
         return $this->hasOne(RequestAlocationTruckDetail::class,'id','t_request_allocation_truck_detail_id');
     }
 
+    public function trucks(){
+        return $this->hasOne(Truck::class,'id','m_trucks_id');
+    }
+
+    public function header_project(){
+        return $this->hasOne(HeaderProject::class,'id','t_project_headers_id');
+    }
+
+    public function commodity(){
+        return $this->hasOne(Commodity::class,'id','m_commodities_id');
+    }
+
     public function detail_mkl(){
         return $this->hasMany(RequestAlocationTruckDetail::class,'id','t_request_allocation_truck_detail_id');
     }
