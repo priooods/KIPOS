@@ -52,7 +52,7 @@ class TruckAllocation extends Controller
     // group 2 => truck_alocation mkl
 
     public function method_truck(Request $request){
-        $cari = Truck::orderBy('nopol')->where('nopol','like','%'.$request->nopol.'%')->paginate(6);
+        $cari = Truck::orderBy('nopol')->where('nopol','like','%'.$request->nopol.'%')->paginate(10);
         return $cari->getCollection();
     }
 
