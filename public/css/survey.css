@@ -12,59 +12,149 @@
 html,body {
   display: grid;
   height: 100%;
-  background: #456;
+  background: rgb(64, 97, 134);
   font-family: 'Open Sans', sans-serif;
   place-items: center;
   text-align: center;
 }
 .container{
-  width: 500px;
+  width: 650px !important;
+  border-radius: 10px;
   background: rgb(255, 255, 255);
-  padding: 30px;
+  padding: 20px 35px 15px 35px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  box-shadow: 0px 0px 50px 15px rgba(0,0,0,0.2);
 }
+
+
+progress {
+  width: 500px;
+  height: 25px;
+  border: 0px none;
+  background-color: #E5E5E5;
+  border-radius: 10px;
+  padding: 4px 5px 5px 5px;
+  }
+  progress::-webkit-progress-bar {
+  background-color: #E5E5E5;
+  border-radius: 50px;
+  padding: 2px;
+  box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+  }
+  progress::-webkit-progress-value {
+  border-radius: 50px;
+  background:
+  -webkit-linear-gradient(135deg, transparent, transparent 20%, rgba(0, 0, 0, 0.1) 33%, #458cb5 50%, transparent 10%),
+  -webkit-linear-gradient(top, #81c5ce, #81c2ce),
+  -webkit-linear-gradient(left, #ba7448, #c4672d);
+  background-size: 25px 14px, 100% 100%, 100% 100%;
+  -webkit-animation: move 5s linear 0 infinite;
+  
+  }
+  @-webkit-keyframes move {
+  0% {background-position: 0px 0px, 0 0, 0 0}
+  100% {background-position:100px 0px, 0 0, 0 0}
+  }
+  .progress-value{
+  color: #444;
+  margin-left: 507px;
+  margin-top: -24px;
+  }
+  
+  .progressDiv {
+  width: 84%;
+  background: #fcfcfc;
+  height: 325px;
+  border: 1px solid #ccc;
+  position: relative;
+  left: 7%;
+  top: 100px;
+  display: inline-block;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px 1px #ccc;
+  }
+
+    /* Pie Chart */
+.progress-pie-chart {
+  width:200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative;
+  }
+  .progress-pie-chart.gt-50 {
+  background-color: #81cece;
+  }
+  
+  .ppc-progress {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 200px, 200px, 100px);
+  }
+  .ppc-progress .ppc-progress-fill {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 100px, 200px, 0);
+  background: #81c2ce;
+  transform: rotate(0deg);
+  }
+  .gt-50 .ppc-progress {
+  clip: rect(0, 100px, 200px, 0);
+  }
+  .gt-50 .ppc-progress .ppc-progress-fill {
+  clip: rect(0, 200px, 200px, 100px);
+  background: #E5E5E5;
+  }
+  
+  .ppc-percents {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 173.91304px/2);
+  top: calc(50% - 173.91304px/2);
+  width: 173.91304px;
+  height: 173.91304px;
+  background: #fff;
+  text-align: center;
+  display: table;
+  }
+  .ppc-percents span {
+  display: block;
+  font-size: 2.6em;
+  font-weight: bold;
+  color: #81bfce;
+  }
+  
+  .pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  }
+  
+  .progress-pie-chart {
+  margin: 50px auto 0;
+  }
+
 .container .stars input, .container .rate input{
   display: none;
 }
-select:invalid { color: gray }
-
-select {
-  width:100%;
-    border:0 solid rgb(255, 255, 255);
-    border-radius:4px;
-    font-size: 17px;
-    outline:none;
-    padding:20px;
-    box-sizing:border-box;
-    transition:.3s;
+select:invalid { color: gray
 }
-input[type=text]{
-  width:100%;
-  border: 0 solid #aaa;
-  border-radius:4px;
-  font-size: 17px;
-  outline:none;
-  padding:5px !important;
-  box-sizing:border-box;
-  transition:.3s;
-}
-input[type=datetime]{
-  width:100%;
-  border: 0 solid #aaa;
-  border-radius:4px;
-  font-size: 17px;
-  outline:none;
-  padding:5px;
-  box-sizing:border-box;
-  transition:.3s;
-} 
 
 .rate label{
   border:1px;
-  padding: 8px 10px;
   font-weight: bold;
   color:white;
 }
@@ -74,9 +164,9 @@ input[type=datetime]{
 }
 .stars label{
   float: right;
-  font-size: 70px;
+  font-size: 50px;
+  cursor: pointer;
   color: lightgrey;
-  margin: 0 5px;
   text-shadow: 1px 1px #bbb;
 }
 .stars label:before{
@@ -112,10 +202,11 @@ input[type=datetime]{
   display: block;
 }
 form .textarea textarea{
-  height: 100%;
+  height: 70px;
   width: 100%;
   color: rgb(83, 84, 85);
   outline: none;
+  border-radius: 5px;
   border: 1px solid rgb(190, 193, 196);
   padding: 10px;
   font-size: 17px;
@@ -131,6 +222,7 @@ form .btn button{
   width: 100%;
   color: rgb(255, 255, 255);
   outline: none;
+  border-radius: 5px;
   border: 1px solid rgb(190, 193, 196);
   background: rgb(48, 151, 255);
   font-size: 17px;
