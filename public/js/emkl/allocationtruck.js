@@ -27,6 +27,7 @@ function details() {
         police_box: false,
         routes_box: false,
         consignee_box: false,
+        sel_police:null,
         form: {
             m_trucks_id: null,
             ritase: 0,
@@ -40,6 +41,18 @@ function details() {
         list: [],
         details_table: {},
         list_details_table: [],
+        list_nopol: [],
+        add_nopol(){
+            if (this.sel_police){
+                if (this.sel_police.nopol == this.police){
+                    if (this.list_nopol.find((x)=>(x.id == this.sel_police.id)) == undefined)
+                        this.list_nopol.push(this.sel_police);
+                }
+            }
+        },
+        remove_nopol(i){
+            this.list_nopol.splice(i,1);
+        },
         init() {
             this.getDetailsAllocation();
             this.$watch("police", (v) => {
@@ -91,9 +104,15 @@ function details() {
                 });
         },
         selectPolice(id, pol, exp) {
-            this.form.m_trucks_id = id;
+            this.sel_police = {
+                id : id,
+                nopol : pol,
+                exp : exp
+            };
             this.police = pol;
-            return (this.police_box = false), (this.expire_date = exp);
+            this.police_box = false;
+            this.expire_date = exp;
+            this.add_nopol();
         },
         selectDriver(id, name) {
             this.driver = name;
@@ -105,18 +124,23 @@ function details() {
             return (this.routes_box = false), (this.form.m_route_id = id);
         },
         sending() {
-            if (
-                !this.expire_date ||
-                !this.form.m_route_id ||
-                !this.form.active_start ||
-                !this.form.active_end
-            ) {
-                this.validation = 1;
-                setTimeout(() => {
-                    return (this.validation = 0);
-                }, 3000);
-            } else {
-                this.showLoading = true;
+            // console.log(JSON.parse(JSON.stringify(this.sel_police)));
+            console.log(JSON.parse(JSON.stringify([
+                this.form.m_route_id,
+                this.form.active_start,
+                this.form.active_end,
+                this.list_nopol.length
+            ])));
+            if (this.form.m_route_id && this.form.active_start && this.form.active_end && this.list_nopol.length>0) {
+                let formData = {};
+                formData['ritase'] = 0;
+                formData['active_start'] = this.form.active_start;
+                formData['active_end'] = this.form.active_end;
+                formData['m_route_id'] = this.form.m_route_id;
+                formData['truck_id'] = [];
+                this.list_nopol.forEach((x,index)=>{
+                    formData['truck_id'][index] = x.id;
+                });
                 fetch(window.location.origin + "/new_emkls", {
                     method: "post",
                     headers: {
@@ -126,32 +150,37 @@ function details() {
                             "content"
                         ),
                     },
-                    body: JSON.stringify(this.form),
+                    body: JSON.stringify(formData),
                 })
-                    .then((res) => res.json())
-                    .then((e) => {
-                        console.log(e);
-                        if (e.error_code)
-                            return (
-                                (this.showLoading = false),
-                                (this.validation = 2),
-                                (this.message = e.error_message),
-                                (this.error_code = e.error_code),
-                                setTimeout(() => {
-                                    this.validation = 0;
-                                }, 3000)
-                            );
-                        this.getDetailsAllocation();
+                .then((res)=>res.json())
+                .then((value) => {
+                    console.log(JSON.parse(JSON.stringify(value)));
+                    if (value.error_code)
                         return (
                             (this.showLoading = false),
-                            (this.validation = 2),
-                            (this.message = "Data Berhasil ditambahkan !"),
-                            (this.error_code = e.error_code),
+                            (this.validation = 3),
+                            (this.message = value.error_message),
+                            (this.error_code = value.error_code),
                             setTimeout(() => {
                                 this.validation = 0;
                             }, 3000)
                         );
-                    });
+                    this.getDetailsAllocation();
+                    return (
+                        (this.showLoading = false),
+                        (this.validation = 2),
+                        (this.message = value.message),
+                        (this.error_code = value.error_code),
+                        setTimeout(() => {
+                            this.validation = 0;
+                        }, 3000)
+                    );
+                });
+            }else{
+                this.validation = 1;
+                setTimeout(() => {
+                    return (this.validation = 0);
+                }, 3000);
             }
         },
         sendEmail(data) {

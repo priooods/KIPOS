@@ -9,16 +9,10 @@ use App\Customer;
 use App\Driver;
 use App\DRoutes;
 use App\HeaderProject;
-use App\Mail\MailGTO;
-use App\RequestAlocationTruckDetail;
 use App\Truck;
 use App\TruckAllocationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class TruckAllocation extends Controller
 {
@@ -39,11 +33,12 @@ class TruckAllocation extends Controller
         return view('halaman.truckallocation.detail')->with('detail', $detail);
     }
 
-    public function get_detail(){
+    public function get_detail($message = ''){
         $detail = AllocationDetailEmkl::find(session('detail')->id);
         $list = AlocationEmkl::where('t_request_allocation_truck_detail_id',$detail->id)->orderBy('id')->with('mobil','driver','route','consigne')->paginate(10);
         return response()->json([
             'error_code' => 0,
+            'message' => $message,
             'data' => $detail,
             'list' => $list,
         ]);
@@ -52,23 +47,23 @@ class TruckAllocation extends Controller
     // group 2 => truck_alocation mkl
 
     public function method_truck(Request $request){
-        $cari = Truck::orderBy('nopol')->where('nopol','like','%'.$request->nopol.'%')->paginate(10);
-        return $cari->getCollection();
+        $cari = Truck::orderBy('nopol')->where('nopol','like',$request->nopol.'%')->take(10)->get();
+        return $cari;
     }
 
     public function method_consignee(Request $request){
-        $cari = Customer::orderBy('code')->where('code','like','%'.$request->code.'%')->paginate(6);
-        return $cari->getCollection();
+        $cari = Customer::orderBy('code')->where('code','like','%'.$request->code.'%')->take(10)->get();
+        return $cari;
     }
 
     public function method_driver(Request $request){
-        $cari = Driver::orderBy('name')->where('name','like','%'.$request->name.'%')->paginate(6);
-        return $cari->getCollection();
+        $cari = Driver::orderBy('name')->where('name','like','%'.$request->name.'%')->take(10)->get();
+        return $cari;
     }
-    
+
     public function method_routes(Request $request){
-        $cari = DRoutes::orderBy('description')->where('description','like','%'.$request->description.'%')->paginate(6);
-        return $cari->getCollection();
+        $cari = DRoutes::orderBy('description')->where('description','like','%'.$request->description.'%')->take(10)->get();
+        return $cari;
     }
 
 
@@ -149,7 +144,6 @@ class TruckAllocation extends Controller
     }
 
     public function save_emkls(Request $request){
-
         $commodity = HeaderProject::where('id',$request->session()->get('detail')->t_project_header_id)
             ->with('commodity')->first();
         $request['created_by'] = Auth::user()->id;
@@ -157,14 +151,22 @@ class TruckAllocation extends Controller
         $request['t_request_allocation_truck_detail_id'] = session()->get('detail')->id;
         $request['m_consignee_id'] = session()->get('detail')->consignee_id;
         $request['t_project_headers_id'] = session()->get('detail')->t_project_header_id;
-
         $allocations = AlocationEmkl::where('t_project_headers_id',$request->t_project_headers_id)
-            ->where('m_trucks_id',$request->m_trucks_id)->count();
-        if(!$allocations){
-            $save = AlocationEmkl::create($request->all());
-            return $this->get_detail();
+            ->whereIn('m_trucks_id',$request->truck_id)->get();
+        $data_send = $request->toArray();
+        unset($data_send['truck_id']);
+        foreach($request->truck_id as $truck){
+            if (!$allocations->where('m_trucks_id', $truck)->first()){
+                $data_send['m_trucks_id'] = $truck;
+                AlocationEmkl::create($data_send);
+            }
         }
-        return $this->resFailed('Informasi truck ini sudah ditambahkan pada ppj ' . session('detail')->project_no);
+        $size = sizeof($request->truck_id);
+        $fail = sizeof($allocations);
+        if ($size == $fail)
+            return $this->resFailed(($size==1 ? 'Truck' : $size.' truck').' ini sudah ditambahkan pada ' . session('detail')->project_no);
+        else
+            return $this->get_detail('Berhasil menambahkan '.($size - sizeof($allocations)).' dari '.$size.' truck pada '. session('detail')->project_no);
     }
 
     public function delete_emkls(Request $request){
@@ -175,8 +177,8 @@ class TruckAllocation extends Controller
 
         $emkl->delete();
         if($emkl)
-            return $this->get_detail();
+            return $this->get_detail('Berhasil menghapus data.');
         return $this->resFailed('Data gagal dihapus !');
     }
-    
+
 }
