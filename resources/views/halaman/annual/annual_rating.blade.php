@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('/css/survey.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/annual.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     
-    <title>Customer Rating</title>
-    <script type="text/javascript">
-        function disableBack() { window.history.forward(); }
-        setTimeout("disableBack()", 0);
-        window.onunload = function () { null };
-    </script>
+    <title>Annual Rating</title>
     <style>
-        body {
-            font-family: 'Roboto';
+        .grid-container {
+          display: grid;
+          grid-template: 150px / auto auto auto;
+          grid-gap: 10px;
+          padding: 10px;
+        }
+        
+        .grid-container > div {
+          background-color:white;
+          text-align: center;
+          padding: 20px 0;
         }
         </style>
+
 </head>
-<nav style="width: 450px">
-</nav>
-<section>
 <body>
+    <div class="grid-container">
+        <div class="item">Annual Rating</div>
+        <div class="item" style="margin: auto">
           <div class="container"><b>
             <p style="color:rgb(255, 94, 94); font-size: 15px">{{$informations[0]->no_ppj}}</p>
             <p style="color:rgb(52, 201, 77); font-size: 15px">{{$informations[0]->nama_jasa}}</p>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SurveyController extends Controller
+class AnnualController extends Controller
 {
     public function index($token){
         $data['informations'] = \DB::select("SELECT 
@@ -34,7 +34,7 @@ class SurveyController extends Controller
         $data['list_item'] = \DB::select("select * from m_customer_rating_items where item_status = 1 and item_flag = 0 order by id asc");
 
             // dd($data);
-        return view('halaman.survey.survey_index', $data);
+        return view('halaman.annual.annual_rating', $data);
     }
 
 
