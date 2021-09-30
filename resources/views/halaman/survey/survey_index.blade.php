@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="HandheldFriendly" content="true">
     <link href="{{ asset('/css/survey.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -17,16 +18,20 @@
         window.onunload = function () { null };
     </script>
     <style>
-        body {
-            font-family: 'Roboto';
-        }
-        </style>
+        html,body {
+            margin: 10px;
+            background: rgb(64, 97, 134);
+            font-family: 'Open Sans', sans-serif;
+            place-items: center;
+            text-align: center;
+            }
+                    body {
+                        font-family: 'Roboto';
+                    }
+    </style>
 </head>
-<nav style="width: 450px">
-</nav>
-<section>
 <body>
-          <div class="container"><b>
+          <div class="container" style="margin: auto"><b>
             <p style="color:rgb(255, 94, 94); font-size: 15px">{{$informations[0]->no_ppj}}</p>
             <p style="color:rgb(52, 201, 77); font-size: 15px">{{$informations[0]->nama_jasa}}</p>
             <p style="color:rgb(161, 161, 161); font-size: 15px">{{$informations[0]->nama_customer}}</p>
@@ -167,6 +172,4 @@
             
         </script>
 </body>
-</section>
-<aside></aside>
 </html>
