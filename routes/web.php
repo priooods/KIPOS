@@ -52,3 +52,5 @@ Route::prefix('index')->group(function () {
 // Route::get('survey', 'surveycontroller@index')->name('survey');
 Route::get('/survey/{token}', 'SurveyController@index')->name('halaman.survey.survey_index');
 Route::post('/update-rating/{id}', 'SurveyController@update')->name('Update.rating');
+Route::get('/annual/{token}', 'AnnualController@index')->name('halaman.annual.annual_rating');
+Route::post('/update-rating/{id}', 'AnnualController@update')->name('Update.rating');
