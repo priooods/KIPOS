@@ -18,7 +18,7 @@
         window.onunload = function () { null };
     </script>
     <style>
-        html,body {
+        html{
             margin: 10px;
             background: rgb(64, 97, 134);
             font-family: 'Open Sans', sans-serif;
@@ -27,6 +27,7 @@
             }
                     body {
                         font-family: 'Roboto';
+                        
                     }
     </style>
 </head>
