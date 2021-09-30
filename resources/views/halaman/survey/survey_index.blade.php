@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content ="width=device-width,initial-scale=1,user-scalable=yes" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="HandheldFriendly" content="true">
     <link href="{{ asset('/css/survey.css') }}" rel="stylesheet">
@@ -12,6 +11,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     
     <title>Customer Rating</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <script type="text/javascript">
         function disableBack() { window.history.forward(); }
         setTimeout("disableBack()", 0);
@@ -27,13 +28,12 @@
             }
                     body {
                         font-family: 'Roboto';
+                        height:100%;
+                        width:100%;
+                        margin:0 !important;
                         
                     }
-                    @media only screen and (max-width: 480px) {
-                                        img {
-                                        width: 100%;
-                                        }
-                                        }
+                    
     </style>
 </head>
 <body>
