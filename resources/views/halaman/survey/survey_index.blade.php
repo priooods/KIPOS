@@ -13,6 +13,7 @@
     <title>Customer Rating</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="viewport" content="width=device-width; initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5; " />
     <script type="text/javascript">
         function disableBack() { window.history.forward(); }
         setTimeout("disableBack()", 0);
