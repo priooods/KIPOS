@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.55, maximum-scale=0.55, minimum-scale=0.55"/>
     <style>
       html{
-        background-color: #05a7ff;
+        background-color: #6acbff;
         padding: 5px;
         margin: 10px;
       }
