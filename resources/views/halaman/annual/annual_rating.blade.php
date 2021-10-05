@@ -11,31 +11,31 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     
     <title>Annual Rating</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.55, maximum-scale=0.55, minimum-scale=0.55"/>
     <style>
-        .grid-container {
-          display: grid;
-          grid-template: 150px / auto auto auto;
-          grid-gap: 10px;
-          padding: 10px;
-        }
+      html{
+        background-color: #05a7ff;
+        padding: 5px;
+        margin: 10px;
+      }
         
-        .grid-container > div {
-          background-color:white;
-          text-align: center;
-          padding: 20px 0;
-        }
         </style>
 
 </head>
 <body>
-    <div class="grid-container">
-        <div class="item">Annual Rating</div>
-        <div class="item" style="margin: auto">
-          <div class="container"><b>
+    <div class="grid">
+        <div class="row">
+        <div class="col">
+        <div class="item"><b>
             <p style="color:rgb(255, 94, 94); font-size: 15px">{{$informations[0]->no_ppj}}</p>
             <p style="color:rgb(52, 201, 77); font-size: 15px">{{$informations[0]->nama_jasa}}</p>
             <p style="color:rgb(161, 161, 161); font-size: 15px">{{$informations[0]->nama_customer}}</p>
             <p style="color:rgb(161, 161, 161); font-size: 15px">{{$informations[0]->vessel_name}}</p></b>
+        </div>
+        </div>
+        <div class="col">
+          <div class="container" style="margin: auto">
             <div class="bars" ; style="height: fit-content">
                 <div id="bars">
                     <div class="bar_container">
@@ -102,6 +102,7 @@
                     <button type="submit" >Post</button>
                 </div>
             </form>
+        </div>
         </div>
         
         @php
@@ -171,7 +172,8 @@
 
             
         </script>
+    </div>
+    </div>
 </body>
 </section>
-<aside></aside>
 </html>
