@@ -39,7 +39,7 @@
 </head>
 <body>
           <div class="container" style="margin: auto"><b>
-            <p style="color:rgb(255, 94, 94); font-size: 15px">{{$informations[0]->no_ppj}}</p>
+            <p style="color:rgb(255, 94, 94); font-size: 15px">{{$informations[0]->description}}</p>
             <p style="color:rgb(52, 201, 77); font-size: 15px">{{$informations[0]->nama_jasa}}</p>
             <p style="color:rgb(161, 161, 161); font-size: 15px">{{$informations[0]->nama_customer}}</p>
             <p style="color:rgb(161, 161, 161); font-size: 15px">{{$informations[0]->vessel_name}}</p></b>
